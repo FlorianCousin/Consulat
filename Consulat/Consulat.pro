@@ -30,18 +30,16 @@ SOURCES += \
     filemanagerwidget.cpp \
     treewidget.cpp \
     tablewidget.cpp \
-    model.cpp \
     textfile.cpp \
-    controller.cpp
+    data.cpp
 
 HEADERS += \
         mainwindow.h \
     filemanagerwidget.h \
     treewidget.h \
     tablewidget.h \
-    model.h \
     textfile.h \
-    controller.h
+    data.h
 
 FORMS +=
 

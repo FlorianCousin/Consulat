@@ -1,8 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent)
+MainWindow::MainWindow(Data* data, QWidget *parent) :
+    QMainWindow(parent),
+    data(data)
 {
     fileManagerWidget = new FileManagerWidget(this);
     treeWidget = new TreeWidget(this);

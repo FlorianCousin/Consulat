@@ -6,13 +6,14 @@
 #include "filemanagerwidget.h"
 #include "treewidget.h"
 #include "tablewidget.h"
+#include "data.h"
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(Data*, QWidget *parent = nullptr);
     ~MainWindow();
 
 private:
@@ -24,6 +25,8 @@ private:
     FileManagerWidget* fileManagerWidget;
     TreeWidget* treeWidget;
     TableWidget* tableWidget;
+
+    Data* data;
 };
 
 #endif // MAINWINDOW_H
