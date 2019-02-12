@@ -3,9 +3,9 @@
 
 #include <QMainWindow>
 
-namespace Ui {
-class MainWindow;
-}
+#include "filemanagerwidget.h"
+#include "treewidget.h"
+#include "tablewidget.h"
 
 class MainWindow : public QMainWindow
 {
@@ -16,7 +16,14 @@ public:
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
+    //Ui::MainWindow *ui;
+    const short FILE_MANAGER = 0;
+    const short TREE = 1;
+    const short TABLE = 2;
+
+    FileManagerWidget* fileManagerWidget;
+    TreeWidget* treeWidget;
+    TableWidget* tableWidget;
 };
 
 #endif // MAINWINDOW_H

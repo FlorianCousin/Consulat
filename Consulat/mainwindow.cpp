@@ -2,13 +2,19 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    QMainWindow(parent)
 {
-    ui->setupUi(this);
+    fileManagerWidget = new FileManagerWidget(this);
+    treeWidget = new TreeWidget(this);
+    tableWidget = new TableWidget(this);
+
+    fileManagerWidget->hide();
+    treeWidget->hide();
+
+    setCentralWidget(tableWidget);
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
 }
+
