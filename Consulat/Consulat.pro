@@ -26,20 +26,30 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
-    filemanagerwidget.cpp \
-    treewidget.cpp \
-    tablewidget.cpp \
-    textfile.cpp \
-    data.cpp
+    controller/concretecontroller.cpp \
+    controller/controller.cpp \
+    view/filemanagerwidget.cpp \
+    view/mainwindow.cpp \
+    view/observer.cpp \
+    view/tablewidget.cpp \
+    view/textfile.cpp \
+    view/treewidget.cpp \
+    model/data.cpp \
+    model/subjectdata.cpp \
+    model/treemodel.cpp
 
 HEADERS += \
         mainwindow.h \
-    filemanagerwidget.h \
-    treewidget.h \
-    tablewidget.h \
-    textfile.h \
-    data.h
+    controller/concretecontroller.h \
+    controller/controller.h \
+    view/filemanagerwidget.h \
+    view/mainwindow.h \
+    view/observer.h \
+    view/tablewidget.h \
+    view/treewidget.h \
+    model/data.h \
+    model/subjectdata.h \
+    model/treemodel.h
 
 FORMS +=
 
@@ -47,3 +57,15 @@ FORMS +=
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+
+# For the curl library
+LIBS += -LD:/OpenSSL-Win64/lib/ -llibcrypto -llibssl
+
+win32:CONFIG(release, debug|release): LIBS += -LD:/OpenSSL-Win64/lib/ -lopenssl
+else:win32:CONFIG(debug, debug|release): LIBS += -LD:/OpenSSL-Win64/lib/ -lopenssl#d
+
+INCLUDEPATH += $$PWD/../../../../../OpenSSL-Win64/include
+DEPENDPATH += $$PWD/../../../../../OpenSSL-Win64/include
+
+PRE_TARGETDEPS += D:/OpenSSL-Win64/lib/openssl.lib

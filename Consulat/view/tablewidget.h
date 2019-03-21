@@ -13,6 +13,9 @@ class TableWidget : public QWidget
     Q_OBJECT
 public:
     explicit TableWidget(QWidget *parent = nullptr);
+    ~TableWidget();
+
+    void update();
 
 private:
 
@@ -20,10 +23,17 @@ private:
     QPushButton* manageFilesButton;
     QPushButton* treeButton;
 
+    QHBoxLayout* buttonsLayout;
+    QVBoxLayout* informationLayout;
+    QHBoxLayout* allLayout;
+
 
 signals:
+    void changeWindowStateSignal(const short &);
 
 public slots:
+    void goToManageFilesWindow();
+    void goToTreeWindow();
 };
 
 #endif // TABLEWIDGET_H

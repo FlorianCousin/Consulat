@@ -1,15 +1,22 @@
-#include "mainwindow.h"
-#include "data.h"
+#include "view/mainwindow.h"
+#include "model/data.h"
 #include <QApplication>
+
+#include <iostream>
+using namespace std;
 
 int main(int argc, char *argv[])
 {
-    Data* model = new Data();
+    Data* data = new Data();
+    Controller* controller = new Controller();
 
     QApplication a(argc, argv);
-    MainWindow w(model);
 
-    w.show();
+    MainWindow mainWindow(data, controller);
+
+    data->setObserver(&mainWindow);
+
+    mainWindow.show();
 
     return a.exec();
 }

@@ -7,6 +7,10 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSpacerItem>
+#include <vector>
+#include <string>
+
+using namespace std;
 
 class FileManagerWidget : public QWidget
 {
@@ -15,16 +19,24 @@ public:
     explicit FileManagerWidget(QWidget *parent = nullptr);
     ~FileManagerWidget();
 
+    void update(const vector<string>&);
+
 private:
 
     QListWidget* listTexts;
     QPushButton* addFileButton;
     QPushButton* processButton;
 
+    QHBoxLayout* buttonsLayout;
+    QVBoxLayout* informationLayout;
+    QHBoxLayout* allLayout;
+
 
 signals:
+    void changeWindowStateSignal(const short &);
 
-public slots:
+private slots:
+    void goToTreeWindow();
 };
 
 #endif // FILEMANAGERWIDGET_H
