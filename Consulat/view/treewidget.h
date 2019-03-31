@@ -5,26 +5,42 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTreeView>
-#include <QTreeWidget> // TODO chose between QTreeView and QTreeWidget and remove the one not used
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSpacerItem>
 
+/**
+ * @brief The TreeWidget class
+ *
+ * The widget that is supposed to display the word process in a tree
+ */
 class TreeWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit TreeWidget(QWidget *parent = nullptr);
+    explicit TreeWidget(QAbstractItemModel * treeModel, QWidget *parent = nullptr);
     ~TreeWidget();
 
-    void update();
+    void update(QAbstractItemModel * treeModel);
+
+
+signals:
+    void changeWindowStateSignal(const short &) const;
+    void searchWordSignal(const QString &) const;
+
+public slots:
+    void goToManageFilesWindow() const;
+    void goToTableWindow() const;
+
+    void searchButtonClicked() const;
+
+
 
 private:
 
     QLineEdit* searchWord;
     QPushButton* searchButton;
-    //QTreeView* searchTree; TODO
-    QTreeWidget* searchTree;
+    QTreeView* searchTree;
     QPushButton* manageFilesButton;
     QPushButton* tableButton;
 
@@ -33,14 +49,6 @@ private:
     QVBoxLayout* informationLayout;
     QHBoxLayout* allLayout;
 
-
-
-signals:
-    void changeWindowStateSignal(const short &);
-
-public slots:
-    void goToManageFilesWindow();
-    void goToTableWindow();
 };
 
 #endif // TREEWIDGET_H

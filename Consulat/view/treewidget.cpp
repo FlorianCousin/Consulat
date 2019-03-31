@@ -1,19 +1,11 @@
 #include "treewidget.h"
 
-TreeWidget::TreeWidget(QWidget *parent) : QWidget(parent)
+TreeWidget::TreeWidget(QAbstractItemModel *treeModel, QWidget *parent) : QWidget(parent)
 {
     // Useful widgets initialisation
     searchWord = new QLineEdit(this);
     searchButton = new QPushButton(tr("&Search"), this);
-    //searchTree = new QTreeView(this); TODO
-
-    searchTree = new QTreeWidget();
-    searchTree->setColumnCount(2);
-    QList<QTreeWidgetItem *> items;
-    for (int i = 0; i < 10; ++i)
-        items.append(new QTreeWidgetItem((QTreeWidget*)nullptr, QStringList(QString("item: %1").arg(i))));
-    searchTree->insertTopLevelItems(0, items);
-    items.first()->addChild(new QTreeWidgetItem((QTreeWidget*)nullptr, QStringList(QString("c'est moi")))); // TODO remove this after test
+    searchTree = new QTreeView(this);
 
     manageFilesButton = new QPushButton(tr("&Manage Files"), this);
     tableButton = new QPushButton(tr("&Table"), this);
@@ -25,8 +17,9 @@ TreeWidget::TreeWidget(QWidget *parent) : QWidget(parent)
 
     connect(manageFilesButton, SIGNAL(clicked()), this, SLOT(goToManageFilesWindow()));
     connect(tableButton, SIGNAL(clicked()), this, SLOT(goToTableWindow()));
+    connect(searchButton, SIGNAL(clicked()), this, SLOT(searchButtonClicked()));
 
-    update();
+    update(treeModel);
 }
 
 TreeWidget::~TreeWidget()
@@ -43,8 +36,14 @@ TreeWidget::~TreeWidget()
     delete allLayout;
 }
 
-void TreeWidget::update()
+/**
+ * @brief TreeWidget::update updates the window according to a TreeModel
+ * @param treeModel
+ */
+void TreeWidget::update(QAbstractItemModel *treeModel)
 {
+    searchTree->setModel(treeModel);
+
     searchLayout->addWidget(searchWord);
     searchLayout->addWidget(searchButton);
 
@@ -64,12 +63,33 @@ void TreeWidget::update()
     this->setLayout(allLayout);
 }
 
-void TreeWidget::goToManageFilesWindow()
+/**
+ * @brief TreeWidget::goToManageFilesWindow is called when the button to go to
+ * the manage files window is clicked. It emits a signal the MainWindow instance is
+ * waiting for.
+ */
+void TreeWidget::goToManageFilesWindow() const
 {
     emit changeWindowStateSignal(0);
 }
 
-void TreeWidget::goToTableWindow()
+/**
+ * @brief TreeWidget::goToTableWindow is called when the button to go to
+ * the table window is clicked. It emits a signal the MainWindow instance is
+ * waiting for.
+ */
+void TreeWidget::goToTableWindow() const
 {
     emit changeWindowStateSignal(2);
+}
+
+/**
+ * @brief TreeWidget::searchButtonClicked is called when the button to search
+ * a word in the texts is clicked. It emits a signal the MainWindow instance is
+ * waiting for.
+ */
+void TreeWidget::searchButtonClicked() const
+{
+    if (!searchWord->text().isEmpty())
+        emit searchWordSignal(searchWord->text());
 }

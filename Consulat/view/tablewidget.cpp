@@ -28,7 +28,10 @@ TableWidget::~TableWidget()
     delete allLayout;
 }
 
-void TableWidget::update()
+/**
+ * @brief TableWidget::update updates the window
+ */
+void TableWidget::update() // TODO put a input to the function and update the function comment accordingly
 {
     buttonsLayout->addWidget(manageFilesButton);
     buttonsLayout->addWidget(treeButton);
@@ -46,12 +49,22 @@ void TableWidget::update()
 
 }
 
-void TableWidget::goToManageFilesWindow()
+/**
+ * @brief TableWidget::goToManageFilesWindow is called when the button to go to
+ * the manage files window is clicked. It emits a signal the MainWindow instance is
+ * waiting for.
+ */
+void TableWidget::goToManageFilesWindow() const
 {
     emit changeWindowStateSignal(0);
 }
 
-void TableWidget::goToTreeWindow()
+/**
+ * @brief TableWidget::goToTreeWindow is called when the button to go to
+ * the tree window is clicked. It emits a signal the MainWindow instance is
+ * waiting for.
+ */
+void TableWidget::goToTreeWindow() const
 {
     emit changeWindowStateSignal(1);
 }

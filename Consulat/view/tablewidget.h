@@ -8,6 +8,11 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
+/**
+ * @brief The TableWidget class
+ *
+ * The widget that is supposed to display the word process in a table
+ */
 class TableWidget : public QWidget
 {
     Q_OBJECT
@@ -16,6 +21,15 @@ public:
     ~TableWidget();
 
     void update();
+
+
+signals:
+    void changeWindowStateSignal(const short &) const;
+
+public slots:
+    void goToManageFilesWindow() const;
+    void goToTreeWindow() const;
+
 
 private:
 
@@ -27,13 +41,6 @@ private:
     QVBoxLayout* informationLayout;
     QHBoxLayout* allLayout;
 
-
-signals:
-    void changeWindowStateSignal(const short &);
-
-public slots:
-    void goToManageFilesWindow();
-    void goToTreeWindow();
 };
 
 #endif // TABLEWIDGET_H

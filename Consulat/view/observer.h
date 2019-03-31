@@ -3,10 +3,15 @@
 
 #include "../controller/controller.h"
 
+/**
+ * @brief The Observer class
+ *
+ * The abstract view of the MVC design
+ */
 class Observer
 {
 public:
-    Observer(Controller*);
+    explicit Observer(Controller*);
     virtual ~Observer();
 
     virtual void update() = 0;

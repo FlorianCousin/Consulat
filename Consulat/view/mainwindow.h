@@ -6,10 +6,15 @@
 #include "filemanagerwidget.h"
 #include "treewidget.h"
 #include "tablewidget.h"
+#include "observer.h"
 #include "../model/data.h"
 #include "../controller/controller.h"
-#include "observer.h"
 
+/**
+ * @brief The MainWindow class
+ *
+ * A concrete view of the MVC design
+ */
 class MainWindow : public QMainWindow, public Observer
 {
     Q_OBJECT
@@ -28,7 +33,7 @@ private:
     const short TREE = 1;
     const short TABLE = 2;
 
-    short windowState = 0;
+    short windowState = 1;
 
 
     QWidget* mainWidget;

@@ -7,11 +7,18 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSpacerItem>
+
 #include <vector>
 #include <string>
 
 using namespace std;
 
+/**
+ * @brief The FileManagerWidget class
+ *
+ * The widget that is supposed to manage the files associated with the process
+ * of words.
+ */
 class FileManagerWidget : public QWidget
 {
     Q_OBJECT
@@ -19,7 +26,15 @@ public:
     explicit FileManagerWidget(QWidget *parent = nullptr);
     ~FileManagerWidget();
 
-    void update(const vector<string>&);
+    void update(const vector<string> & fileNames);
+
+
+signals:
+    void changeWindowStateSignal(const short &) const;
+
+private slots:
+    void goToTreeWindow() const;
+
 
 private:
 
@@ -30,13 +45,6 @@ private:
     QHBoxLayout* buttonsLayout;
     QVBoxLayout* informationLayout;
     QHBoxLayout* allLayout;
-
-
-signals:
-    void changeWindowStateSignal(const short &);
-
-private slots:
-    void goToTreeWindow();
 };
 
 #endif // FILEMANAGERWIDGET_H

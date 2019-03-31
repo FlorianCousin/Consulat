@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,21 +26,19 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-    controller/concretecontroller.cpp \
     controller/controller.cpp \
     view/filemanagerwidget.cpp \
     view/mainwindow.cpp \
     view/observer.cpp \
     view/tablewidget.cpp \
-    view/textfile.cpp \
     view/treewidget.cpp \
     model/data.cpp \
     model/subjectdata.cpp \
-    model/treemodel.cpp
+    model/treemodel.cpp \
+    model/treeitem.cpp \
+    controller/concretecontroller.cpp
 
 HEADERS += \
-        mainwindow.h \
-    controller/concretecontroller.h \
     controller/controller.h \
     view/filemanagerwidget.h \
     view/mainwindow.h \
@@ -49,7 +47,9 @@ HEADERS += \
     view/treewidget.h \
     model/data.h \
     model/subjectdata.h \
-    model/treemodel.h
+    model/treemodel.h \
+    model/treeitem.h \
+    controller/concretecontroller.h
 
 FORMS +=
 

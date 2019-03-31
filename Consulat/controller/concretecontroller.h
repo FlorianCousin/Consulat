@@ -1,15 +1,44 @@
 #ifndef CONCRETECONTROLLER_H
 #define CONCRETECONTROLLER_H
 
+#include "controller.h"
 #include "../model/data.h"
 
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QJsonArray>
+
+/**
+ * @brief The ConcreteController class
+ *
+ * A concrete controller in the MVC design that uses html call to communicate
+ * with JiaLin's part.
+ */
 class ConcreteController : public Controller
 {
+    Q_OBJECT
 public:
-    ConcreteController();
+    explicit ConcreteController(Data * data, QObject *parent = nullptr);
+
+signals:
+
+public slots:
+    virtual void searchWord(const QString & lineEdit) override;
+    void handleReply(QNetworkReply *reply);
 
 private:
-    Data* data;
+    QString lastSearchWord;
+
+    Data * data;
+
+    QNetworkAccessManager access;
+
+    bool processed;
 };
 
 #endif // CONCRETECONTROLLER_H

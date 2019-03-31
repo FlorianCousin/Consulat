@@ -3,8 +3,11 @@
 
 #include <QObject>
 
-//#include <curl/curl.h>
-
+/**
+ * @brief The Controller class
+ *
+ * The abstract controller in the MVC design.
+ */
 class Controller : public QObject
 {
     Q_OBJECT
@@ -14,6 +17,7 @@ public:
 signals:
 
 public slots:
+    virtual void searchWord(const QString & lineEdit) = 0;
 
 };
 

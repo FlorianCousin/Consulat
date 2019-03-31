@@ -29,7 +29,13 @@ FileManagerWidget::~FileManagerWidget()
     delete allLayout;
 }
 
-void FileManagerWidget::update(const vector<string> &)
+/**
+ * @brief FileManagerWidget::update updates the window according to the list of
+ * the names of the files that has to be considered in the word process
+ *
+ * @param fileNames the vector of the names of the files
+ */
+void FileManagerWidget::update(const vector<string> & fileNames)
 {
     buttonsLayout->addWidget(addFileButton);
     buttonsLayout->addWidget(processButton);
@@ -46,7 +52,12 @@ void FileManagerWidget::update(const vector<string> &)
     this->setLayout(allLayout);
 }
 
-void FileManagerWidget::goToTreeWindow()
+/**
+ * @brief FileManagerWidget::goToTreeWindow is called when the button to go to
+ * the tree window is clicked. It emits a signal the MainWindow instance is
+ * waiting for.
+ */
+void FileManagerWidget::goToTreeWindow() const
 {
     emit changeWindowStateSignal(1);
 }

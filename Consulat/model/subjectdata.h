@@ -3,15 +3,20 @@
 
 #include "../view/observer.h"
 
+/**
+ * @brief The SubjectData class
+ *
+ * The abstract model of the MVC design.
+ */
 class SubjectData
 {
 public:
     SubjectData();
-    SubjectData(Observer*);
+    explicit SubjectData(Observer*);
     ~SubjectData();
 
     void setObserver(Observer*);
-    void notify();
+    void notify() const;
 
 private:
     Observer* observer;
