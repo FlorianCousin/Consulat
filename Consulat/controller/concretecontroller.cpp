@@ -1,8 +1,5 @@
 #include "concretecontroller.h"
 
-//#include <QEventLoop> // TODO either remove this or put it in the header file
-#include <iostream> // TODO remove this at the end
-
 ConcreteController::ConcreteController(Data *data, QObject *parent) :
     Controller(parent),
     data(data)
@@ -10,30 +7,42 @@ ConcreteController::ConcreteController(Data *data, QObject *parent) :
 
 }
 
-void ConcreteController::searchWord(const QString &lineEdit)
+/**
+ * @brief ConcreteController::httpRequest sends the request to the server
+ * @param lineEdit the word to send in the request
+ * @param search whether the server has to use the search or the generate method
+ */
+void ConcreteController::httpRequest(const QString &lineEdit, bool search)
 {
     processed = false;
     lastSearchWord = lineEdit;
 
-    access.get(QNetworkRequest(QUrl("http://lijleen.zicp.io:3003/?"
-                                             "fbclid=IwAR2N8eb4ALHWowQszDRBA0C68myMHT4gxyXDCK33Sgfg3BJjmUdVnS7UV5w"
-                                             "&seed=" + QString(lineEdit).replace(" ", "%20"))));
+    QString sUrl = "http://lijleen.zicp.io:3003/?"
+              "fbclid=IwAR2N8eb4ALHWowQszDRBA0C68myMHT4gxyXDCK33Sgfg3BJjmUdVnS7UV5w"
+              "&seed=" + QString(lineEdit).replace(" ", "%20");
+    if (!search)
+        sUrl.append("&method=generate");
+
+    access.get(QNetworkRequest(QUrl(sUrl)));
 
     connect(&access, SIGNAL(finished(QNetworkReply*)), this, SLOT(handleReply(QNetworkReply*)));
+}
+
+void ConcreteController::searchWord(const QString &lineEdit)
+{
+    httpRequest(lineEdit, true);
 }
 
 void ConcreteController::generateWord(const QString &lineEdit)
 {
-    processed = false;
-    lastSearchWord = lineEdit;
-
-    access.get(QNetworkRequest(QUrl("http://lijleen.zicp.io:3003/?method=generate&"
-                                             "fbclid=IwAR2N8eb4ALHWowQszDRBA0C68myMHT4gxyXDCK33Sgfg3BJjmUdVnS7UV5w"
-                                             "&seed=" + QString(lineEdit).replace(" ", "%20"))));
-
-    connect(&access, SIGNAL(finished(QNetworkReply*)), this, SLOT(handleReply(QNetworkReply*)));
+    httpRequest(lineEdit, false);
 }
 
+/**
+ * @brief ConcreteController::handleReply handles the reply of the server
+ * request sent in the httpRequest function
+ * @param reply
+ */
 void ConcreteController::handleReply(QNetworkReply* reply)
 {
     if (processed)

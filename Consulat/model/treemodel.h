@@ -6,6 +6,8 @@
 
 #include <QJsonArray>
 
+#include <iostream>
+
 #include "treeitem.h"
 
 /**

@@ -54,6 +54,11 @@ void TreeWidget::update(QAbstractItemModel *treeModel)
     this->setLayout(allLayout);
 }
 
+/**
+ * @brief TreeWidget::generateButtonClicked is called when the button to
+ * generate a sentence from a word is clicked. It emits a signal the
+ * MainWindow instance is waiting for.
+ */
 void TreeWidget::generateButtonClicked() const
 {
     if (!searchWord->text().isEmpty())

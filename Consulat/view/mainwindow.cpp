@@ -1,7 +1,5 @@
 #include "mainwindow.h"
 
-#include <iostream> // TODO remove this at the end
-
 MainWindow::MainWindow(Data* data, Controller* controller, QWidget *parent) :
     QMainWindow(parent),
     Observer(controller),

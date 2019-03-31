@@ -10,7 +10,6 @@ public:
     ~TreeItem();
 
     void appendChild(TreeItem * child);
-
     TreeItem *getChild(int row);
     int getChildCount() const;
     int getColumnCount() const;

@@ -1,7 +1,5 @@
 #include "treeitem.h"
 
-#include <iostream> // TODO remove this at the end
-
 TreeItem::TreeItem(const QString& data, TreeItem *parentItem) :
     data(data),
     parent(parentItem)
@@ -54,7 +52,6 @@ int TreeItem::getChildCount() const
  */
 int TreeItem::getColumnCount() const
 {
-    // return data.count(); This is when data is a QList
     return 1;
 }
 
@@ -72,7 +69,6 @@ QString TreeItem::getData(int column) const
                                 + ", " + std::to_string(getColumnCount())
                                 + "]].");
 
-    //return data.at(column); This is when data is a QList
     return data;
 }
 

@@ -13,6 +13,8 @@
 #include <QJsonValue>
 #include <QJsonArray>
 
+#include <iostream>
+
 /**
  * @brief The ConcreteController class
  *
@@ -24,6 +26,7 @@ class ConcreteController : public Controller
     Q_OBJECT
 public:
     explicit ConcreteController(Data * data, QObject *parent = nullptr);
+    void httpRequest(const QString & lineEdit, bool search = true);
 
 signals:
 

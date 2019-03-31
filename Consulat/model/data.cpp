@@ -1,7 +1,5 @@
 #include "data.h"
 
-#include <iostream> // TODO remove this at the end
-
 Data::Data()
 {
     treeModel = new TreeModel(QString(), QString());
@@ -12,28 +10,20 @@ Data::~Data()
     delete treeModel;
 }
 
-void Data::addFile(const string &fileName)
-{
-    fileNames.push_back(fileName);
-    notify();
-}
-
-void Data::removeFile(const int &fileNumber)
-{
-    fileNames.removeAt(fileNumber);
-    notify();
-}
-
-const QList<string> &Data::getFileNames() const
-{
-    return fileNames;
-}
-
+/**
+ * @brief Data::getTreeModel retrieve the TreeModel
+ * @return the TreeModel
+ */
 QAbstractItemModel *Data::getTreeModel()
 {
     return treeModel;
 }
 
+/**
+ * @brief Data::setTreeModel defines the TreeModel when the data is a string
+ * @param searchWord
+ * @param dataString
+ */
 void Data::setTreeModel(const QString searchWord, const QString &dataString)
 {
     delete treeModel;
@@ -41,6 +31,11 @@ void Data::setTreeModel(const QString searchWord, const QString &dataString)
     notify();
 }
 
+/**
+ * @brief Data::setTreeModel defines the TreeModel when the data is a QJsonArray
+ * @param searchWord
+ * @param dataArray
+ */
 void Data::setTreeModel(const QString searchWord, const QJsonArray &dataArray)
 {
     delete treeModel;

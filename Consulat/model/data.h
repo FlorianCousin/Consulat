@@ -19,15 +19,11 @@ public:
     Data();
     ~Data();
 
-    void addFile(const string &);
-    void removeFile(const int &);
-    const QList<string>& getFileNames() const;
     QAbstractItemModel * getTreeModel();
     void setTreeModel(const QString searchWord, const QString & dataString);
     void setTreeModel(const QString searchWord, const QJsonArray & dataArray);
 
 private:
-    QList<string> fileNames;
     QAbstractItemModel * treeModel;
 };
 
