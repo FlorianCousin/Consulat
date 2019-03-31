@@ -18,6 +18,7 @@ signals:
 
 public slots:
     virtual void searchWord(const QString & lineEdit) = 0;
+    virtual void generateWord(const QString & lineEdit) = 0;
 
 };
 

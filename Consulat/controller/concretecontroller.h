@@ -29,6 +29,7 @@ signals:
 
 public slots:
     virtual void searchWord(const QString & lineEdit) override;
+    virtual void generateWord(const QString & lineEdit) override;
     void handleReply(QNetworkReply *reply);
 
 private:

@@ -4,19 +4,15 @@ TreeWidget::TreeWidget(QAbstractItemModel *treeModel, QWidget *parent) : QWidget
 {
     // Useful widgets initialisation
     searchWord = new QLineEdit(this);
+    generateButton = new QPushButton(tr("&Generate"), this);
     searchButton = new QPushButton(tr("&Search"), this);
     searchTree = new QTreeView(this);
 
-    manageFilesButton = new QPushButton(tr("&Manage Files"), this);
-    tableButton = new QPushButton(tr("&Table"), this);
-
-    searchLayout = new QHBoxLayout();
     buttonsLayout = new QHBoxLayout();
     informationLayout = new QVBoxLayout();
     allLayout = new QHBoxLayout();
 
-    connect(manageFilesButton, SIGNAL(clicked()), this, SLOT(goToManageFilesWindow()));
-    connect(tableButton, SIGNAL(clicked()), this, SLOT(goToTableWindow()));
+    connect(generateButton, SIGNAL(clicked()), this, SLOT(generateButtonClicked()));
     connect(searchButton, SIGNAL(clicked()), this, SLOT(searchButtonClicked()));
 
     update(treeModel);
@@ -25,12 +21,10 @@ TreeWidget::TreeWidget(QAbstractItemModel *treeModel, QWidget *parent) : QWidget
 TreeWidget::~TreeWidget()
 {
     delete searchWord;
+    delete generateButton;
     delete searchButton;
     delete searchTree;
-    delete manageFilesButton;
-    delete tableButton;
 
-    delete searchLayout;
     delete buttonsLayout;
     delete informationLayout;
     delete allLayout;
@@ -44,16 +38,13 @@ void TreeWidget::update(QAbstractItemModel *treeModel)
 {
     searchTree->setModel(treeModel);
 
-    searchLayout->addWidget(searchWord);
-    searchLayout->addWidget(searchButton);
-
-    buttonsLayout->addWidget(manageFilesButton);
-    buttonsLayout->addWidget(tableButton);
+    buttonsLayout->addWidget(generateButton);
+    buttonsLayout->addWidget(searchButton);
 
     informationLayout->addSpacing(5);
-    informationLayout->addLayout(searchLayout);
-    informationLayout->addWidget(searchTree);
+    informationLayout->addWidget(searchWord);
     informationLayout->addLayout(buttonsLayout);
+    informationLayout->addWidget(searchTree);
     informationLayout->addSpacing(5);
 
     allLayout->addSpacing(5);
@@ -63,24 +54,10 @@ void TreeWidget::update(QAbstractItemModel *treeModel)
     this->setLayout(allLayout);
 }
 
-/**
- * @brief TreeWidget::goToManageFilesWindow is called when the button to go to
- * the manage files window is clicked. It emits a signal the MainWindow instance is
- * waiting for.
- */
-void TreeWidget::goToManageFilesWindow() const
+void TreeWidget::generateButtonClicked() const
 {
-    emit changeWindowStateSignal(0);
-}
-
-/**
- * @brief TreeWidget::goToTableWindow is called when the button to go to
- * the table window is clicked. It emits a signal the MainWindow instance is
- * waiting for.
- */
-void TreeWidget::goToTableWindow() const
-{
-    emit changeWindowStateSignal(2);
+    if (!searchWord->text().isEmpty())
+        emit generateWordSignal(searchWord->text());
 }
 
 /**

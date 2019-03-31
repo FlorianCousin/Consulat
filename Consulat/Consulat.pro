@@ -27,10 +27,8 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
     controller/controller.cpp \
-    view/filemanagerwidget.cpp \
     view/mainwindow.cpp \
     view/observer.cpp \
-    view/tablewidget.cpp \
     view/treewidget.cpp \
     model/data.cpp \
     model/subjectdata.cpp \
@@ -40,10 +38,8 @@ SOURCES += \
 
 HEADERS += \
     controller/controller.h \
-    view/filemanagerwidget.h \
     view/mainwindow.h \
     view/observer.h \
-    view/tablewidget.h \
     view/treewidget.h \
     model/data.h \
     model/subjectdata.h \

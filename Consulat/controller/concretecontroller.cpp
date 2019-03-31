@@ -22,6 +22,18 @@ void ConcreteController::searchWord(const QString &lineEdit)
     connect(&access, SIGNAL(finished(QNetworkReply*)), this, SLOT(handleReply(QNetworkReply*)));
 }
 
+void ConcreteController::generateWord(const QString &lineEdit)
+{
+    processed = false;
+    lastSearchWord = lineEdit;
+
+    access.get(QNetworkRequest(QUrl("http://lijleen.zicp.io:3003/?method=generate&"
+                                             "fbclid=IwAR2N8eb4ALHWowQszDRBA0C68myMHT4gxyXDCK33Sgfg3BJjmUdVnS7UV5w"
+                                             "&seed=" + QString(lineEdit).replace(" ", "%20"))));
+
+    connect(&access, SIGNAL(finished(QNetworkReply*)), this, SLOT(handleReply(QNetworkReply*)));
+}
+
 void ConcreteController::handleReply(QNetworkReply* reply)
 {
     if (processed)

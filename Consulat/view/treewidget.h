@@ -25,13 +25,11 @@ public:
 
 
 signals:
-    void changeWindowStateSignal(const short &) const;
+    void generateWordSignal(const QString &) const;
     void searchWordSignal(const QString &) const;
 
 public slots:
-    void goToManageFilesWindow() const;
-    void goToTableWindow() const;
-
+    void generateButtonClicked() const;
     void searchButtonClicked() const;
 
 
@@ -39,12 +37,10 @@ public slots:
 private:
 
     QLineEdit* searchWord;
+    QPushButton* generateButton;
     QPushButton* searchButton;
     QTreeView* searchTree;
-    QPushButton* manageFilesButton;
-    QPushButton* tableButton;
 
-    QHBoxLayout* searchLayout;
     QHBoxLayout* buttonsLayout;
     QVBoxLayout* informationLayout;
     QHBoxLayout* allLayout;
